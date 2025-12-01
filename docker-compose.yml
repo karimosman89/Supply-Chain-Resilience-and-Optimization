@@ -224,6 +224,7 @@ volumes:
   grafana_data:
   rabbitmq_data:
   minio_data:
+  ml_model_cache:
 
 networks:
   supply_chain_network:
