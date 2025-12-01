@@ -1,0 +1,46 @@
+.App {
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: #282c34;
+}
+
+.App-header {
+  background-color: #282c34;
+  padding: 20px;
+  color: white;
+  border-radius: 8px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.App-header h1 {
+  margin: 0 0 20px 0;
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+.App-header p {
+  margin: 10px 0;
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-header {
+    animation: App-header-pulse 2s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes App-header-pulse {
+  from {
+    background-color: #282c34;
+  }
+  to {
+    background-color: #3a3f47;
+  }
+}
