@@ -143,7 +143,7 @@ class Product(Base):
     
     # Calculated fields
     available_stock = Column(Integer, default=0)
-    stock_value = Column(Decimal(12, 2))
+    stock_value = Column(Numeric(12, 2))
     turnover_rate = Column(Float)
     
     # Metadata
@@ -207,7 +207,7 @@ class DemandForecast(Base):
     forecasted_demand = Column(Float, nullable=False)
     confidence_lower = Column(Float)
     confidence_upper = Column(Float)
-    accuracy_score = Column(Float)  # Historical accuracy if available
+    accuracy_score = Column(Float)  
     
     # Model information
     model_version = Column(String(50), nullable=False)
