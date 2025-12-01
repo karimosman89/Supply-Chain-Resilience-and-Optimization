@@ -62,5 +62,3 @@ export const PLATFORM_INFO = {
     efficiencyImprovement: '25%',
     riskMitigation: '30%',
     forecastAccuracy: '95%+'
-  }
-};
