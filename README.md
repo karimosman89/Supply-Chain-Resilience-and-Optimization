@@ -150,7 +150,7 @@ print(f"ROI: {roi:.1%}")  # 1042% ROI in year 1
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-org/supply-chain-platform.git
+   git clone https://github.com/karimosman89/Supply-Chain-Resilience-and-Optimization.git
    cd supply-chain-platform
    ```
 
@@ -287,9 +287,7 @@ print(f"Risk level: {risk_data['data']['risk_level']}")
 
 ---
 
-## 🤝 Contributing
 
-We welcome contributions from the community! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
 
 ### Development Workflow
 1. Fork the repository
@@ -349,15 +347,9 @@ We welcome contributions from the community! Please see our [Contributing Guidel
 ## 📞 Contact & Support
 
 ### Get in Touch
-- **Email**: contact@supplychain-platform.com
-- **LinkedIn**: [Supply Chain Platform](https://linkedin.com/company/supply-chain-platform)
-- **Website**: https://supplychain-platform.com
+- **Email**: karim.programmer2020@gmail.com
+- **LinkedIn**: [Karim Osman](https://www.linkedin.com/in/karimosman89/)
 
-### Support Options
-- **Documentation**: https://docs.supplychain-platform.com
-- **Community Forum**: https://community.supplychain-platform.com
-- **Enterprise Support**: Available for enterprise customers
-- **Training**: Custom training programs available
 
 ---
 
@@ -386,6 +378,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Built with ❤️ by MiniMax Agent**
+**Built with ❤️ by Karim Osman**
 
 *Transforming Supply Chain Management with AI-Powered Intelligence*
