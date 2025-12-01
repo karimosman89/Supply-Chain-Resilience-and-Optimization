@@ -150,7 +150,7 @@ print(f"ROI: {roi:.1%}")  # 1042% ROI in year 1
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-org/supply-chain-platform.git
+   git clone https://github.com/karimosman89/Supply-Chain-Resilience-and-Optimization.git
    cd supply-chain-platform
    ```
 
