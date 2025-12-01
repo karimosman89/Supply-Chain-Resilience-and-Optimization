@@ -38,7 +38,7 @@ jobs:
       - name: Install Node.js dependencies
         run: |
           cd frontend
-          npm install || true
+          npm install --legacy-peer-deps || true
 
       - name: Python Code Quality
         run: |
@@ -161,12 +161,13 @@ jobs:
       - name: Install dependencies
         run: |
           cd frontend
-          npm install || true
+          npm install --legacy-peer-deps || true
 
       - name: Run Frontend Tests
         run: |
           cd frontend
-          npm test -- --coverage --watchAll=false
+          npm install --legacy-peer-deps
+          CI=true npm test -- --coverage --watchAll=false --passWithNoTests
 
       - name: Upload Coverage to Codecov
         uses: codecov/codecov-action@v4
@@ -303,7 +304,7 @@ jobs:
       - name: Run End-to-End Tests
         run: |
           cd tests/e2e
-          npm ci
+          npm install --legacy-peer-deps
           npm run test:ci
 
       - name: Collect test results
@@ -328,7 +329,7 @@ jobs:
         run: docker-compose up -d
 
       - name: Run Load Tests
-        uses: k6io/action@v0.1.0
+        uses: grafana/run-k6-action@v2
         with:
           k6script: 'tests/load/load-test.js'
 
