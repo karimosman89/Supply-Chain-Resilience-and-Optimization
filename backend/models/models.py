@@ -6,7 +6,7 @@ Author: MiniMax Agent
 """
 
 from sqlalchemy import Column, Integer, String, Float, DateTime, Date, Boolean, Text, Enum, JSON, ForeignKey, Index
-from sqlalchemy.types import Decimal
+from sqlalchemy import Numeric
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
@@ -172,7 +172,7 @@ class HistoricalDemand(Base):
     
     # Demand data
     quantity_sold = Column(Integer, nullable=False)
-    unit_price = Column(Decimal(10, 2))
+    unit_price = Column(Numeric(10, 2))
     
     # Contextual factors
     promotion_applied = Column(Boolean, default=False)
