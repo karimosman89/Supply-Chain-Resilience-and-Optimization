@@ -329,7 +329,7 @@ jobs:
         run: docker-compose up -d
 
       - name: Run Load Tests
-        uses: grafana/run-k6-action@v2
+        uses: grafana/run-k6-action@v1
         with:
           k6script: 'tests/load/load-test.js'
 
