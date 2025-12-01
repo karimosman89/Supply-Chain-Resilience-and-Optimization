@@ -349,15 +349,9 @@ We welcome contributions from the community! Please see our [Contributing Guidel
 ## 📞 Contact & Support
 
 ### Get in Touch
-- **Email**: contact@supplychain-platform.com
-- **LinkedIn**: [Supply Chain Platform](https://linkedin.com/company/supply-chain-platform)
-- **Website**: https://supplychain-platform.com
+- **Email**: karim.programmer2020@gmail.com
+- **LinkedIn**: [Karim Osman](https://www.linkedin.com/in/karimosman89/)
 
-### Support Options
-- **Documentation**: https://docs.supplychain-platform.com
-- **Community Forum**: https://community.supplychain-platform.com
-- **Enterprise Support**: Available for enterprise customers
-- **Training**: Custom training programs available
 
 ---
 
@@ -386,6 +380,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Built with ❤️ by MiniMax Agent**
+**Built with ❤️ by Karim Osman**
 
 *Transforming Supply Chain Management with AI-Powered Intelligence*
