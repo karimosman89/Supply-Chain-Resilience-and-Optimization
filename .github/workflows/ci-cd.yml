@@ -144,9 +144,9 @@ jobs:
             echo "Creating test directory..."
             mkdir -p tests
             cat > tests/test_example.py << 'EOF'
-      def test_example():
-          assert 1 + 1 == 2
-      EOF
+          def test_example():
+            assert 1 + 1 == 2
+          EOF
           fi
           pytest tests/ --cov=app --cov-report=xml --cov-report=html --cov-report=term-missing -v
     
