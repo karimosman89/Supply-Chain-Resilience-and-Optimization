@@ -1,4 +1,5 @@
 import { describe, it, expect } from '@jest/globals';
+import '@testing-library/jest-dom';
 
 // Basic test to ensure the app renders without errors
 describe('App Component', () => {
