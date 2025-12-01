@@ -17,7 +17,7 @@ flake8==6.1.0
 bandit==1.7.5
 mypy==1.7.1
 pre-commit==3.6.0
-safety==2.3.5
+# Removed safety due to packaging version conflicts - can be added back if needed
 
 # Documentation Tools
 mkdocs==1.5.3
