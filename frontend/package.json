@@ -76,6 +76,8 @@
   },
   "devDependencies": {
     "@types/jest": "^27.5.0",
+    "@testing-library/jest-dom": "^6.0.0",
+    "@testing-library/react": "^13.0.0",
     "eslint": "^8.0.0",
     "prettier": "^3.0.0",
     "eslint-plugin-react": "^7.33.0",
