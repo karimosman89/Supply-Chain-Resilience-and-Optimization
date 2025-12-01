@@ -5,7 +5,8 @@ Enterprise-grade database schema with relationships
 Author: MiniMax Agent
 """
 
-from sqlalchemy import Column, Integer, String, Float, DateTime, Date, Boolean, Text, Enum, JSON, ForeignKey, Decimal, Index
+from sqlalchemy import Column, Integer, String, Float, DateTime, Date, Boolean, Text, Enum, JSON, ForeignKey, Index
+from sqlalchemy.types import Decimal
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
