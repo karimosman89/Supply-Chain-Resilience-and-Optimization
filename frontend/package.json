@@ -3,6 +3,7 @@
   "version": "2.0.0",
   "description": "Modern Supply Chain Analytics Dashboard",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@types/node": "^16.18.0",
     "@types/react": "^18.2.0",
@@ -56,12 +57,7 @@
     "format": "prettier --write src/**/*.{js,jsx,ts,tsx,css,md}",
     "type-check": "tsc --noEmit"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
+
   "browserslist": {
     "production": [
       ">0.2%",
