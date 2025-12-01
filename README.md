@@ -287,9 +287,7 @@ print(f"Risk level: {risk_data['data']['risk_level']}")
 
 ---
 
-## 🤝 Contributing
 
-We welcome contributions from the community! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
 
 ### Development Workflow
 1. Fork the repository
