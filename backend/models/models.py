@@ -129,7 +129,7 @@ class Product(Base):
     name = Column(String(200), nullable=False)
     category = Column(String(100), nullable=False)
     description = Column(Text)
-    unit_cost = Column(Decimal(10, 2))
+    unit_cost = Column(Numeric(10, 2))
     
     # Supply chain information
     supplier_id = Column(Integer, ForeignKey("suppliers.id"))
