@@ -351,30 +351,18 @@ print(f"Risk level: {risk_data['data']['risk_level']}")
 - **LinkedIn**: [Karim Osman](https://www.linkedin.com/in/karimosman89/)
 
 
----
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## 🏆 Awards & Recognition
-
-- **🏅 AI Innovation Award 2025** - Supply Chain Excellence
-- **🏅 Best Supply Chain Technology** - Logistics Innovation Summit
-- **🏅 Rising Star** - Enterprise Software Awards
-
----
 
 ## 📊 Project Statistics
 
-![GitHub stars](https://img.shields.io/github/stars/your-org/supply-chain-platform?style=social)
-![GitHub forks](https://img.shields.io/github/forks/your-org/supply-chain-platform?style=social)
-![GitHub issues](https://img.shields.io/github/issues/your-org/supply-chain-platform)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/your-org/supply-chain-platform)
-![GitHub workflow status](https://img.shields.io/github/workflow/status/your-org/supply-chain-platform/CI)
-![Test coverage](https://img.shields.io/codecov/c/github/your-org/supply-chain-platform)
+![GitHub stars](https://img.shields.io/github/stars/karimosman89/Supply-Chain-Resilience-and-Optimization?style=social)
+![GitHub forks](https://img.shields.io/github/forks/karimosman89/Supply-Chain-Resilience-and-Optimization?style=social)
+![GitHub issues](https://img.shields.io/github/issues/karimosman89/Supply-Chain-Resilience-and-Optimization)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/karimosman89/Supply-Chain-Resilience-and-Optimization)
+![GitHub workflow status](https://img.shields.io/github/workflow/status/karimosman89/Supply-Chain-Resilience-and-Optimization/CI)
+![Test coverage](https://img.shields.io/codecov/c/github/karimosman89/Supply-Chain-Resilience-and-Optimization)
 
 ---
 
