@@ -44,7 +44,7 @@ export default function() {
       try {
         const body = JSON.parse(r.body);
         return body.status === 'healthy';
-      } catch {
+      } catch (e){
         return false;
       }
     },
