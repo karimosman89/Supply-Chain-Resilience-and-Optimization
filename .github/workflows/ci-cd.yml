@@ -371,7 +371,7 @@ jobs:
       - name: Run Load Tests
         uses: grafana/run-k6-action@v1
         with:
-          k6script: 'tests/load/load-test.js'
+          path: 'tests/load/load-test.js'
 
       - name: Upload performance results
         uses: actions/upload-artifact@v4
