@@ -1,11 +1,3 @@
-/**
- * Supply Chain Resilience & Optimization Platform
- * Modern React Dashboard with Real-time Analytics
- * 
- * Author: MiniMax Agent
- * Version: 2.0.0
- */
-
 import React from 'react';
 import './App.css';
 
@@ -62,3 +54,5 @@ export const PLATFORM_INFO = {
     efficiencyImprovement: '25%',
     riskMitigation: '30%',
     forecastAccuracy: '95%+'
+  }
+};
