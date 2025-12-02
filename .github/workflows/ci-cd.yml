@@ -374,7 +374,26 @@ jobs:
 
       - name: Start application
         run: docker-compose up -d
+        
+      - name: Wait for services to be healthy
+        run: |
+          echo "Waiting for backend service to be ready..."
+          timeout 300 bash -c 'until curl -f http://localhost:8000/health; do sleep 5; done'
+          
+          echo "Waiting for frontend service to be ready..."
+          timeout 300 bash -c 'until curl -f http://localhost:3000; do sleep 5; done'
 
+      - name: Verify services are running
+        run: |
+          echo "Checking service health..."
+          docker-compose ps
+          
+          echo "Testing backend health endpoint..."
+          curl -f http://localhost:8000/health || echo "Backend not ready"
+          
+          echo "Testing frontend endpoint..."
+          curl -f http://localhost:3000 || echo "Frontend not ready"
+          
       - name: Run Load Tests
         run: |
           ./k6-v0.47.0-linux-amd64/k6 run tests/load/load-test.js
