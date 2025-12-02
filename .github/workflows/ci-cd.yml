@@ -364,9 +364,8 @@ jobs:
         run: |
           curl -L https://github.com/grafana/k6/releases/download/v0.47.0/k6-v0.47.0-linux-amd64.tar.gz -o k6.tar.gz
           tar -xzf k6.tar.gz
-          sudo cp k6-v0.47.0-linux-amd64/k6 /usr/local/bin/
-          chmod +x /usr/local/bin/k6
-          rm -rf k6.tar.gz k6-v0.47.0-linux-amd64
+          chmod +x k6-v0.47.0-linux-amd64/k6
+          echo "export PATH=\$PATH:\$(pwd)/k6-v0.47.0-linux-amd64" >> ~/.bashrc
           
       - name: Install Docker Compose
         run: |
@@ -378,7 +377,7 @@ jobs:
 
       - name: Run Load Tests
         run: |
-          k6 run tests/load/load-test.js
+          ./k6-v0.47.0-linux-amd64/k6 run tests/load/load-test.js
 
       - name: Upload performance results
         uses: actions/upload-artifact@v4
