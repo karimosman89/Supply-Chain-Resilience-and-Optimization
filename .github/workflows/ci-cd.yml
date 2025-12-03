@@ -318,20 +318,75 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        
-      - name: Cleanup any existing containers and ports
+
+      - name: Comprehensive cleanup of containers and ports
         run: |
-          docker compose -f docker-compose.test.yml down --remove-orphans || true
+          echo "Starting comprehensive cleanup..."
           
-          # Kill any processes using the common ports to ensure they're free
-          sudo lsof -ti:5432 | xargs sudo kill -9 || true
-          sudo lsof -ti:6379 | xargs sudo kill -9 || true
-          sudo lsof -ti:5672 | xargs sudo kill -9 || true
-          sudo lsof -ti:9000 | xargs sudo kill -9 || true
+          # Stop and remove ALL containers from both compose files
+          echo "Stopping test environment containers..."
+          docker compose -f docker-compose.test.yml down --remove-orphans --volumes 2>/dev/null || true
           
-          # Ensure Docker networks are cleaned
-          docker network prune -f || true 
-      
+          echo "Stopping production environment containers..."
+          docker compose down --remove-orphans --volumes 2>/dev/null || true
+          
+          # Kill ALL processes using ANY of the project ports
+          echo "Killing processes on common project ports..."
+          for port in 5432 6379 5672 9000 9001 15672 8000 8001 3000 3001 9090 80 443; do
+            sudo lsof -ti:$port 2>/dev/null | xargs -r sudo kill -9 || true
+            echo "Cleaned port $port"
+          done
+          
+          # Remove ALL project containers (by name pattern)
+          echo "Removing any remaining project containers..."
+          docker ps -a --filter "name=supply-chain" --format "{{.ID}}" | xargs -r docker rm -f 2>/dev/null || true
+          docker ps -a --filter "name=supply_chain" --format "{{.ID}}" | xargs -r docker rm -f 2>/dev/null || true
+          
+          # Comprehensive Docker cleanup
+          echo "Performing Docker cleanup..."
+          docker system prune -af --volumes 2>/dev/null || true
+          docker network prune -f 2>/dev/null || true
+          docker volume prune -f 2>/dev/null || true
+          
+          # Wait for ports to be fully released
+          echo "Waiting for ports to be released..."
+          sleep 10
+          
+          # Verify ports are free
+          echo "Verifying ports are free..."
+          for port in 5432 6379 5672 9000; do
+            if lsof -i:$port >/dev/null 2>&1; then
+              echo "WARNING: Port $port is still in use!"
+            else
+              echo "Port $port is free"
+            fi
+          done
+          
+          echo "Cleanup completed"
+          
+      - name: Validate Docker Compose configuration
+        run: |
+          echo "Validating docker-compose.test.yml configuration..."
+          docker compose -f docker-compose.test.yml config --quiet || {
+            echo "ERROR: Docker Compose configuration is invalid"
+            exit 1
+          }
+          echo "Docker Compose configuration is valid"
+          
+      - name: Check port availability
+        run: |
+          echo "Checking if required ports are available..."
+          ports=(5432 6379 5672 9000 8000 3000)
+          for port in "${ports[@]}"; do
+            if lsof -i:$port >/dev/null 2>&1; then
+              echo "ERROR: Port $port is still in use!"
+              exit 1
+            else
+              echo "Port $port is available ✓"
+            fi
+          done
+          echo "All required ports are available"
+
       - name: Start services with Docker Compose
         run: |
           docker compose -f docker-compose.test.yml up -d
