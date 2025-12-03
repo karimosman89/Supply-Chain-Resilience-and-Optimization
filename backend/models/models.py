@@ -1,17 +1,18 @@
-"""
-SQLAlchemy Database Models for Supply Chain Platform
-Enterprise-grade database schema with relationships
-
-Author: MiniMax Agent
-"""
-
-from sqlalchemy import Column, Integer, String, Float, DateTime, Date, Boolean, Text, Enum, JSON, ForeignKey, Index
-from sqlalchemy import Numeric
+from sqlalchemy import (
+    Column, Integer, String, Float, DateTime, Date, Boolean, Text, 
+    Enum, JSON, ForeignKey, Index
+)
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 import enum
 from datetime import datetime
+
+# Robust import for numeric types (SQLAlchemy 1.4+ and 2.0+)
+try:
+    from sqlalchemy import Numeric
+except ImportError:
+    from sqlalchemy.types import Numeric
 
 Base = declarative_base()
 
@@ -63,6 +64,16 @@ class Supplier(Base):
     contact_email = Column(String(255))
     contact_phone = Column(String(50))
     rating = Column(Float)  # 0-5 scale
+    
+    @property
+    def email(self):
+        """Backward compatibility property for email attribute"""
+        return self.contact_email
+    
+    @property
+    def location(self):
+        """Backward compatibility property for location attribute"""
+        return self.country
     
     # Performance metrics
     performance_score = Column(Float)  # 0-100 scale
@@ -207,7 +218,7 @@ class DemandForecast(Base):
     forecasted_demand = Column(Float, nullable=False)
     confidence_lower = Column(Float)
     confidence_upper = Column(Float)
-    accuracy_score = Column(Float)  
+    accuracy_score = Column(Float)  # Historical accuracy if available
     
     # Model information
     model_version = Column(String(50), nullable=False)
