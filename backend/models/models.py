@@ -161,7 +161,10 @@ class Product(Base):
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime, default=func.now())
     updated_at = Column(DateTime, default=func.now(), onupdate=func.now())
-    
+    @property
+    def status(self):
+        """Backward compatibility property for status attribute"""
+        return "active" if self.is_active else "inactive"
     # Relationships
     supplier = relationship("Supplier", back_populates="products")
     demand_history = relationship("HistoricalDemand", back_populates="product")
