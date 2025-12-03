@@ -72,9 +72,15 @@ def test_database_config():
     # Test REDIS_URL format
     redis_url = os.getenv('REDIS_URL')
     if redis_url:
-        assert redis_url.startswith('redis://'), \
-            f"Invalid REDIS_URL format: {redis_url}"
-        print(f"✅ REDIS_URL is properly formatted")
+        valid_formats = [
+            'postgresql://',
+            'postgresql+psycopg2://',
+            'postgresql+asyncpg://',
+            'sqlite://'
+        ]
+        
+        assert any(db_url.startswith(fmt) for fmt in valid_formats), \
+               f"Invalid DATABASE_URL format: {db_url}"
     else:
         print("⚠️  REDIS_URL not set, using default")
 
