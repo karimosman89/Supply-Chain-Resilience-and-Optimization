@@ -129,16 +129,17 @@ jobs:
 
       - name: Run Database Migrations
         env:
-          DATABASE_URL: postgresql+asyncpg://postgres:postgres@localhost:5432/test_db
+          DATABASE_URL: postgresql+psycopg2://postgres:postgres@localhost:5432/test_db
           REDIS_URL: redis://localhost:6379
         run: |
           cd backend
+          pip install psycopg2-binary
           # First try to run migrations, fallback to creating initial tables
           alembic upgrade head || (echo "Alembic upgrade failed, trying alternative..." && python -c "
           from models.models import Base
           from sqlalchemy import create_engine
           import os
-          engine = create_engine(os.getenv('DATABASE_URL', 'postgresql+asyncpg://postgres:postgres@localhost:5432/test_db'))
+          engine = create_engine(os.getenv('DATABASE_URL', 'postgresql+psycopg2://postgres:postgres@localhost:5432/test_db'))'))
           Base.metadata.create_all(bind=engine)
           print('Database tables created successfully')
           ")
