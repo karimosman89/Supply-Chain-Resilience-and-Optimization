@@ -15,7 +15,7 @@ sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 config = context.config
 
 # Configure the database URL from environment or use default
-database_url = os.getenv('DATABASE_URL', 'postgresql+asyncpg://postgres:postgres@localhost:5432/test_db')
+database_url = os.getenv('DATABASE_URL', 'postgresql://postgres:postgres@localhost:5432/test_db')
 config.set_main_option("sqlalchemy.url", database_url)
 
 # Interpret the config file for Python logging.
@@ -25,8 +25,21 @@ if config.config_file_name is not None:
 
 # add your model's MetaData object here
 # for 'autogenerate' support
-from models.models import Base  # Import your models here
-target_metadata = Base.metadata
+try:
+    from models.models import Base  # Import your models here
+    target_metadata = Base.metadata
+except ImportError as e:
+    print(f"Warning: Could not import models: {e}")
+    print("Creating fallback Base metadata...")
+    from sqlalchemy.ext.declarative import declarative_base
+    Base = declarative_base()
+    target_metadata = Base.metadata
+except Exception as e:
+    print(f"Error importing models: {e}")
+    print("Creating fallback Base metadata...")
+    from sqlalchemy.ext.declarative import declarative_base
+    Base = declarative_base()
+    target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
@@ -67,8 +80,14 @@ def run_migrations_online() -> None:
     and associate a connection with the context.
 
     """
+    
+    # Always use synchronous operations for consistency with models
+    engine = engine_from_config(
+        config.get_section(config.config_ini_section, {}),
+        prefix="sqlalchemy.",
+        poolclass=pool.NullPool,
+    )
 
-    # For async migrations
     def do_run_migrations(connection):
         context.configure(
             connection=connection,
@@ -80,38 +99,8 @@ def run_migrations_online() -> None:
         with context.begin_transaction():
             context.run_migrations()
 
-    # Try async first
-    try:
-        # Check if database URL is async
-        if "+asyncpg" in database_url or "+aiosqlite" in database_url:
-            # Create async engine
-            engine = create_async_engine(database_url)
-            
-            async def run_async_migrations():
-                async with engine.connect() as connection:
-                    await connection.run_sync(do_run_migrations)
-                    
-            asyncio.run(run_async_migrations())
-            engine.sync_engine.dispose()
-        else:
-            # Fallback to sync
-            engine = engine_from_config(
-                config.get_section(config.config_ini_section, {}),
-                prefix="sqlalchemy.",
-                poolclass=pool.NullPool,
-            )
-            with engine.connect() as connection:
-                do_run_migrations(connection)
-            
-    except Exception as e:
-        # Fallback to sync for environments that don't support async
-        engine = engine_from_config(
-            config.get_section(config.config_ini_section, {}),
-            prefix="sqlalchemy.",
-            poolclass=pool.NullPool,
-        )
-        with engine.connect() as connection:
-            do_run_migrations(connection)
+    with engine.connect() as connection:
+        do_run_migrations(connection)
 
 
 if context.is_offline_mode():
