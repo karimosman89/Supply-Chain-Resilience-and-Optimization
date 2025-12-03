@@ -366,6 +366,6 @@ print(f"Risk level: {risk_data['data']['risk_level']}")
 
 ---
 
-**Built with ❤️ by Karim Osman**
+**Built by Karim Osman**
 
 *Transforming Supply Chain Management with AI-Powered Intelligence*
