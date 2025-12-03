@@ -435,7 +435,7 @@ jobs:
           echo "export PATH=\$PATH:\$(pwd)/k6-v0.47.0-linux-amd64" >> ~/.bashrc
 
       - name: Start application
-        run: docker compose up -d
+        run: docker compose -f docker-compose.test.yml up -d
 
       - name: Wait for services to be healthy
         run: |
