@@ -318,7 +318,20 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
+        
+      - name: Cleanup any existing containers and ports
+        run: |
+          docker compose -f docker-compose.test.yml down --remove-orphans || true
+          
+          # Kill any processes using the common ports to ensure they're free
+          sudo lsof -ti:5432 | xargs sudo kill -9 || true
+          sudo lsof -ti:6379 | xargs sudo kill -9 || true
+          sudo lsof -ti:5672 | xargs sudo kill -9 || true
+          sudo lsof -ti:9000 | xargs sudo kill -9 || true
+          
+          # Ensure Docker networks are cleaned
+          docker network prune -f || true 
+      
       - name: Start services with Docker Compose
         run: |
           docker compose -f docker-compose.test.yml up -d
